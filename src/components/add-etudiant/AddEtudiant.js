@@ -8,7 +8,8 @@ class AddEtudiant extends Component {
         this.state = 
         {
             email: '',
-            description: ''
+            description: '',
+            password: ''
         };
 
         this.getData = this.getData.bind(this)
@@ -16,30 +17,30 @@ class AddEtudiant extends Component {
     }
 
     getData = (event) => {
-        console.log(event.target.value);
-        this.setState({
-            email : event.target.value,
-            description: event.target.value,
-        })
+        if (event.target.name === 'email') {
+            console.log(event.target.value);
+        }
+        //console.log(event.target.value)
     }
 
-
-
-    inscription = (event) => {
-        console.log(this.state.value)
+    inscription = (event) => { 
+        console.log("methode 1",event.target.email.value)
+        console.log("methode 2",event.target[0].value)
+        console.log("methode 3",event.target.elements.email.value)
+        
         event.preventDefault()
     }
 
     render() {
         return (
             <form onSubmit={this.inscription}>
-                <div className="mb-3">
+                <div className="mb-3"> 
                     <label className="form-label">Email address</label>
                     <input type="email" name="email" className="form-control" value={this.props.email} onChange={this.getData}/>
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Description</label>
-                    <textarea className="form-control" value={this.props.description} onChange={this.getData}></textarea>
+                    <textarea name="description" className="form-control" value={this.props.description} onChange={this.getData}></textarea>
                 </div>
                 <input className="btn btn-primary" type="submit" value="Submit"/>
             </form>
